@@ -32,8 +32,8 @@ model = RedNeuronal(W1, b1, W2, b2)
 
 # funciones de activacion
 relu(x) = max.(0,x)
+id(x) = x
 softmax(x) = exp.(x) / sum(exp.(x))
-
 
 function forward_pass(model, x)
 	# Implementar una funcion que para cada dato x retorne la prediccion segun 
@@ -42,11 +42,12 @@ function forward_pass(model, x)
 	z_1 = W1 * x + b1
 	a_1 = relu(z_1)
 	z_2 = W2 * a_1 + b2
-	a_2 = z_2
+	a_2 = id(z_2) # redundante pero descriptivo
 	y = softmax(a_2)
 	return y	
 end
 
+# TODO
 function grad(model, x, y)
 	# Implementar una funcion que calcule el gradiente de la funcion de perdida para 
 	# cada par de datos (x,y) utilizando backprop. Usarla para calcular el grad completo
@@ -54,12 +55,23 @@ function grad(model, x, y)
 		
 end
 
+# TODO
 function train!(model, train_set, step, max_iter)
 	# La funcion debe retornar el modelo entrenado y un vector ocn los valores de la 
 	# funcion de perdida en cada iteracion
 	# Opcional: Probar distintas funciones de activacion y comparar
+	cross_entropy(y, y_hat) = -sum(y*log.(y_hat))
+	for i in 1:max_iter
+		# begin iter
+		# correr forward pass -> y
+		# calcular cross entropy -> loss 
+		# hacer backprop -> delta_C
+		# actualizar? preguntar
+		# end iter	
+	end
 end
 
+# TODO
 function results()
 	# Implementar una funcion que retorne un grafico de los valores de la funcion 
 	# de perdida para cada iteracion y el rendimiento de nuestro modelo tanto en
